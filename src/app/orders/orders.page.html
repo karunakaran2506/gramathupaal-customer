@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="dashboard"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="this.orderList && this.orderList.length; else noData">
+    <ion-row>
+      <ion-col>
+        <h3 class="center">Order History</h3>
+      </ion-col>
+    </ion-row>
+    <ion-card *ngFor="let data of orderList">
+      <ion-card-content>
+        <ion-row>
+          <ion-col size="12" *ngFor="let item of data.orderitems">
+            <p class="mar-0">{{item.product.name}} x {{item.quantity}} = {{item.totalamount | currency: 'INR'}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" style="text-align: left;">
+            <p class="mar-0"><b>Order ID</b></p>
+            <p class="mar-0"><b>Order Date</b></p>
+            <p class="mar-0"><b>Payment Method</b></p>
+            <p class="mar-0"><b>Total Amount</b></p>
+          </ion-col>
+          <ion-col size="6" style="text-align: right;">
+            <p class="mar-0"><b>{{data?.orderid}}</b></p>
+            <p class="mar-0"><b>{{data.createdat | date : 'dd/MM/yy, h:mm a'}}</b></p>
+            <p class="mar-0"><b>{{data.paymentMethod | titlecase}}</b></p>
+            <p class="mar-0"><b>{{data.totalamount | currency: 'INR'}}</b></p>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ng-template #noData>
+    <ion-row>
+      <ion-col class="center" size="12">
+        No data found
+      </ion-col>
+    </ion-row>
+  </ng-template>
+</ion-content>

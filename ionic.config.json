@@ -1,0 +1,7 @@
+{
+  "name": "gramathupaal-customer",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

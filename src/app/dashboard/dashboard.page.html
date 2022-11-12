@@ -1,0 +1,81 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [matMenuTriggerFor]="menu">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="gotoPage('/edit-profile')">
+          <mat-icon>person</mat-icon>
+          <span>Edit Profile</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>power_settings_new</mat-icon>
+          <span>Log-out</span>
+        </button>
+      </mat-menu>
+    </ion-buttons>
+    <ion-title>GramathuPaal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+<ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="3" style="text-align: left;">
+          <p class="mar-0"><b>Name</b></p>
+          <p class="mar-0"><b>Phone</b></p>
+          <p class="mar-0"><b>Email</b></p>
+        </ion-col>
+        <ion-col size="9" style="text-align: right;">
+          <p class="mar-0"><b>{{customer?.name | titlecase}}</b></p>
+          <p class="mar-0"><b>{{customer?.phone}}</b></p>
+          <p class="mar-0"><b>{{customer?.email || '-'}}</b></p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-row>
+    <ion-col class="center" size="6">
+      <ion-card class="card" (click)="gotoPage('/tokens')">
+        <ion-card-content>
+          {{this.tokenLength}}
+          <ion-card-subtitle>Active Tokens</ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col class="center" size="6">
+      <ion-card class="card" (click)="gotoPage('/orders')">
+        <ion-card-content>
+          {{this.orderLength}}
+          <ion-card-subtitle>Total Orders</ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col class="center" size="6">
+      <ion-card class="card" (click)="gotoPage('/milkcard')">
+        <ion-card-content>
+          {{this.milkcardLength}}
+          <ion-card-subtitle>Active Milkcards</ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col class="center" size="6">
+      <ion-card class="card" (click)="gotoPage('/subscription')">
+        <ion-card-content>
+          {{this.subscriptionLength}}
+          <ion-card-subtitle>Active Subscription</ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
